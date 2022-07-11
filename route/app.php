@@ -1,17 +1,15 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+declare (strict_types = 1);
+
 use think\facade\Route;
 
-Route::get('think', function () {
-    return 'hello,ThinkPHP6!';
-});
-
-Route::get('hello/:name', 'index/hello');
+/**
+ * 应用级 miss 路由.
+ *
+ * 说明：当 [ 应用 ] 访问不存在时被执行. <br/>
+ * 例如：http://localhost:8000/myapp/index <br/>
+ *      应用 myapp 不存在时，则会执行下面的定义.
+ *
+ *      如果是应用内部的控制器或方法不存在时，则执行应用中路由配置的 miss 方法，而不是全局路由配置的 miss 方法
+ */
+Route::miss(static fn() => '404 Not Found!');
