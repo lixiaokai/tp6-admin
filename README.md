@@ -61,3 +61,15 @@ php think run -p 80
 ```
 php think build demo
 ```
+
+### 3. 快速生成控制器
+
+默认生成资源控制器，注意控制器名称要用大写
+
+```
+// 生成一级控制器: app/admin/controller/UserController.php
+php think make:controller admin@User
+
+// 生成多级控制器: app/admin/controller/auth/UserController.php
+php think make:controller admin@auth/User
+```
