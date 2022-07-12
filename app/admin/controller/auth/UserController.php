@@ -3,11 +3,17 @@ declare (strict_types = 1);
 
 namespace app\admin\controller\auth;
 
+use app\common\exception\NotFoundException;
+use app\common\service\user\UserService;
 use think\Request;
 use think\Response;
+use think\annotation\Inject;
 
 class UserController
 {
+    #[Inject]
+    protected UserService $service;
+
     /**
      * 显示资源列表
      *
@@ -16,6 +22,18 @@ class UserController
     public function index()
     {
         echo __METHOD__;
+    }
+
+    /**
+     * 用户管理 - 详情.
+     *
+     * @throws NotFoundException
+     */
+    public function read(int $id): Response
+    {
+        $model = $this->service->get($id);
+
+        return json($model);
     }
 
     /**
@@ -35,17 +53,6 @@ class UserController
      * @return Response
      */
     public function save(Request $request)
-    {
-        echo __METHOD__;
-    }
-
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function read($id)
     {
         echo __METHOD__;
     }
