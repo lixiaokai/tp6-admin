@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace app\common\repository;
 
 use app\common\exception\NotFoundException;
+use app\common\exception\SaveErrorException;
+use Exception;
 use think\App;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
@@ -37,9 +39,7 @@ abstract class BaseRepository implements RepositoryInterface
         try {
             return $this->model->findOrFail($id);
         } catch (DbException $e) {
-            $logMessage = $e->getMessage();
-            $this->app->log->error($logMessage, ['table' => $this->model->getTable()]);
-
+            $this->app->log->error($e->getMessage());
             throw new NotFoundException();
         }
     }
@@ -49,6 +49,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function findBy(string $field, mixed $value): Collection
     {
+        // Todo: 待实现
         return $this->model->where($field, $value)->select();
     }
 
@@ -57,6 +58,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function all(): Collection
     {
+        // Todo: 待实现
         return $this->model->select();
     }
 
@@ -69,14 +71,31 @@ abstract class BaseRepository implements RepositoryInterface
         return $this->model->paginate();
     }
 
+    /**
+     * @throws SaveErrorException
+     */
     public function create(array $data): Model
     {
-        return $this->model::create($data);
+        try {
+            return $this->model::create($data);
+        } catch (Exception $e) {
+            $this->app->log->error($e->getMessage());
+            throw new SaveErrorException();
+        }
     }
 
+    /**
+     * @throws SaveErrorException
+     */
     public function update(Model $model, array $data): Model
     {
-        $model->save($data);
+        try {
+            $model->save($data);
+        } catch (Exception $e) {
+            $this->app->log->error($e->getMessage());
+            throw new SaveErrorException();
+        }
+
         return $model;
     }
 
