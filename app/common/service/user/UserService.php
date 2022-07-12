@@ -27,8 +27,7 @@ class UserService extends BaseService
         try {
             return $this->repo->find($id);
         } catch (NotFoundException) {
-            throw new NotFoundException('用户信息 不存在');
+            throw new NotFoundException(__('messages.not.found', ['name' => '用户信息']));
         }
     }
 }
-

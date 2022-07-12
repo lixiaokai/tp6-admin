@@ -10,15 +10,19 @@ return [
     'allow_lang_list' => [],
     // 多语言自动侦测变量名
     'detect_var'      => 'lang',
-    // 是否使用Cookie记录
+    // 是否使用 Cookie 记录
     'use_cookie'      => true,
-    // 多语言cookie变量
-    'cookie_var'      => 'think_lang',
-    // 多语言header变量
-    'header_var'      => 'think-lang',
+    // 多语言 cookie 变量
+    'cookie_var'      => 'lang',
+    // 多语言 header 变量
+    'header_var'      => 'lang',
     // 扩展语言包
-    'extend_list'     => [],
-    // Accept-Language转义为对应语言包名称
+    'extend_list'     => [
+        'zh-cn' => [
+            app()->getBasePath() . 'common' . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . 'zh-cn' . DIRECTORY_SEPARATOR . 'messages.php',
+        ],
+    ],
+    // Accept-Language 转义为对应语言包名称
     'accept_language' => [
         'zh-hans-cn' => 'zh-cn',
     ],
