@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace app\common\exception;
 
+use think\Exception;
+
 /**
  * 数据 - 异常类.
  */
-class DataNotFoundException extends \think\db\exception\DataNotFoundException
+class NotFoundException extends Exception
 {
     protected $code = 10404;
 

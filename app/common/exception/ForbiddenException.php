@@ -10,7 +10,7 @@ use think\Exception;
  */
 class ForbiddenException extends Exception
 {
-    protected $message = '无权访问';
+    protected $code = 10403;
 
-    protected $code = 104003;
+    protected $message = '无权访问';
 }

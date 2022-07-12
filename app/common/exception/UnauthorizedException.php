@@ -10,7 +10,7 @@ use think\Exception;
  */
 class UnauthorizedException extends Exception
 {
-    protected $message = '未经授权';
-
     protected $code = 10401;
+
+    protected $message = '未经授权';
 }
