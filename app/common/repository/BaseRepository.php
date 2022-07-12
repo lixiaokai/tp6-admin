@@ -37,7 +37,7 @@ abstract class BaseRepository implements RepositoryInterface
         try {
             return $this->model->findOrFail($id);
         } catch (DbException $e) {
-            $logMessage = $e->getMessage() . ' ( Table: {table} )';
+            $logMessage = $e->getMessage();
             $this->app->log->error($logMessage, ['table' => $this->model->getTable()]);
 
             throw new NotFoundException();
