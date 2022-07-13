@@ -14,22 +14,27 @@ interface RepositoryInterface
     /**
      * 获取 - 1 条主键记录.
      */
-    public function find(int $id): Model;
+    public function getById(int $id): Model;
+
+    /**
+     * 获取 - 多条主键记录.
+     */
+    public function getByIds(array $ids, array $columns = ['*']): Collection;
 
     /**
      * 获取 - 多条某属性记录.
      */
-    public function findBy(string $field, mixed $value): Collection;
+    public function getBy(string $field, mixed $value): Collection;
 
     /**
      * 获取 - 所有记录.
      */
-    public function all(): Collection;
+    public function all(array $columns = ['*']): Collection;
 
     /**
      * 获取 - 搜索记录.
      */
-    public function search($perPage = 15): Paginator;
+    public function search(): Paginator;
 
     /**
      * 创建 - 记录.

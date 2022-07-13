@@ -7,9 +7,7 @@ use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;
 use Exception;
 use think\App;
-use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
-use think\db\exception\ModelNotFoundException;
 use think\Model;
 use think\Collection;
 use think\Paginator;
@@ -27,14 +25,14 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function __construct(App $app)
     {
-        $this->app = $app;
+        $this->app   = $app;
         $this->model = $this->app->make($this->modelClass);
     }
 
     /**
      * @throws NotFoundException
      */
-    public function find(int $id): Model
+    public function getById(int $id): Model
     {
         try {
             return $this->model->findOrFail($id);
@@ -45,27 +43,48 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @throws DataNotFoundException|DbException|ModelNotFoundException
+     * @throws DbException
      */
-    public function findBy(string $field, mixed $value): Collection
+    public function getByIds(array $ids, array $columns = ['*']): Collection
     {
-        // Todo: 待实现
-        return $this->model->where($field, $value)->select();
-    }
-
-    /**
-     * @throws DataNotFoundException|DbException|ModelNotFoundException
-     */
-    public function all(): Collection
-    {
-        // Todo: 待实现
-        return $this->model->select();
+        try {
+            return $this->model->field($columns)->select($ids);
+        } catch (DbException $e) {
+            $this->app->log->error($e->getMessage());
+            throw new DbException('未知错误');
+        }
     }
 
     /**
      * @throws DbException
      */
-    public function search($perPage = 15): Paginator
+    public function getBy(string $field, mixed $value): Collection
+    {
+        try {
+            return $this->model->where($field, $value)->select();
+        } catch (DbException $e) {
+            $this->app->log->error($e->getMessage());
+            throw new DbException('未知错误');
+        }
+    }
+
+    /**
+     * @throws DbException
+     */
+    public function all(array $columns = ['*']): Collection
+    {
+        try {
+            return $this->model->field($columns)->select();
+        } catch (DbException $e) {
+            $this->app->log->error($e->getMessage());
+            throw new DbException('未知错误');
+        }
+    }
+
+    /**
+     * @throws DbException
+     */
+    public function search(): Paginator
     {
         // Todo: 待实现
         return $this->model->paginate();
