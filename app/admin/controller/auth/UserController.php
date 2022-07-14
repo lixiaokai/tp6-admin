@@ -3,25 +3,29 @@ declare (strict_types = 1);
 
 namespace app\admin\controller\auth;
 
+use app\common\controller\BaseController;
 use app\common\exception\NotFoundException;
+use app\common\exception\SaveErrorException;
 use app\common\service\user\UserService;
-use think\Request;
+use think\db\exception\DbException;
 use think\Response;
 use think\annotation\Inject;
 
-class UserController
+class UserController extends BaseController
 {
     #[Inject]
     protected UserService $service;
 
     /**
-     * 显示资源列表
+     * 用户管理 - 列表.
      *
-     * @return Response
+     * @throws DbException
      */
-    public function index()
+    public function index(): Response
     {
-        echo __METHOD__;
+        $res = $this->service->search($this->request->param());
+
+        return json(['code' => 200, 'data' => $res]);
     }
 
     /**
@@ -33,61 +37,85 @@ class UserController
     {
         $model = $this->service->get($id);
 
-        return json($model);
+        return json(['code' => 10200, 'message' => '', 'data' => $model]);
     }
 
     /**
-     * 显示创建资源表单页.
+     * 用户管理 - 创建.
      *
-     * @return Response
      */
-    public function create()
+    public function save(UserValidate $validate): Response
     {
-        echo __METHOD__;
+        $model = $this->service->create($validate->checked());
+
+        return json(['code' => 200, 'data' => $model]);
     }
 
     /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return Response
+     * 用户管理 - 更新.
+     * @throws NotFoundException|SaveErrorException
      */
-    public function save(Request $request)
+    public function update(UserValidate $validate, int $id): Response
     {
-        echo __METHOD__;
+        $model = $this->service->get($id);
+        $data = $validate->scene('update')->checked();
+        $this->service->update($model, $data);
+
+        return json(['code' => 200, 'data' => $model]);
+    }
+
+    /**
+     * 用户管理 - 删除.
+     *
+     * @throws NotFoundException
+     */
+    public function delete(int $id): Response
+    {
+        $user = $this->service->get($id);
+        // $this->service->delete($user);
+
+        return json(['code' => 10200, 'message' => '', 'data' => ['id' => $id]]);
+    }
+
+    /**
+     * 用户管理 - 启用.
+     *
+     * @throws NotFoundException
+     */
+    public function enable(int $id): Response
+    {
+        $model = $this->service->get($id);
+        $model = $this->service->enable($model);
+
+        return json(['code' => 200, 'data' => $model]);
+    }
+
+    /**
+     * 用户管理 - 禁用.
+     *
+     * @throws NotFoundException
+     */
+    public function disable(int $id): Response
+    {
+        $model = $this->service->get($id);
+        $model = $this->service->disable($model);
+
+        return json(['code' => 200, 'data' => $model]);
     }
 
     /**
      * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return Response
      */
-    public function edit($id)
+    public function edit(int $id): void
     {
-        echo __METHOD__;
+        //
     }
 
     /**
-     * 保存更新的资源
-     *
-     * @param  \think\Request  $request
-     * @param  int  $id
-     * @return Response
+     * 显示创建资源表单页.
      */
-    public function update(Request $request, $id)
+    public function create(): void
     {
-        echo __METHOD__;
-    }
-
-    /**
-     * 删除指定资源
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function delete($id)
-    {
-        echo __METHOD__;
+        //
     }
 }
