@@ -2,6 +2,7 @@
 
 namespace app\common\repository;
 
+use think\db\Query;
 use think\Model;
 use think\Collection;
 use think\Paginator;
@@ -11,6 +12,11 @@ use think\Paginator;
  */
 interface RepositoryInterface
 {
+    /**
+     * 创建 - 查询对象.
+     */
+    public function getQuery(): Query;
+
     /**
      * 获取 - 1 条主键记录.
      */

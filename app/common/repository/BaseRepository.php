@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace app\common\repository;
 
+use app\common\exception\BizException;
 use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;
 use Exception;
 use think\App;
 use think\db\exception\DbException;
+use think\db\Query;
 use think\Model;
 use think\Collection;
 use think\Paginator;
@@ -29,6 +31,11 @@ abstract class BaseRepository implements RepositoryInterface
         $this->model = $this->app->make($this->modelClass);
     }
 
+    public function getQuery(): Query
+    {
+        return $this->model->newQuery();
+    }
+
     /**
      * @throws NotFoundException
      */
@@ -43,7 +50,7 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @throws DbException
+     * @throws BizException
      */
     public function getByIds(array $ids, array $columns = ['*']): Collection
     {
@@ -51,12 +58,12 @@ abstract class BaseRepository implements RepositoryInterface
             return $this->model->field($columns)->select($ids);
         } catch (DbException $e) {
             $this->app->log->error($e->getMessage());
-            throw new DbException('未知错误');
+            throw new BizException();
         }
     }
 
     /**
-     * @throws DbException
+     * @throws BizException
      */
     public function getBy(string $field, mixed $value): Collection
     {
@@ -64,12 +71,12 @@ abstract class BaseRepository implements RepositoryInterface
             return $this->model->where($field, $value)->select();
         } catch (DbException $e) {
             $this->app->log->error($e->getMessage());
-            throw new DbException('未知错误');
+            throw new BizException();
         }
     }
 
     /**
-     * @throws DbException
+     * @throws BizException
      */
     public function all(array $columns = ['*']): Collection
     {
@@ -77,7 +84,7 @@ abstract class BaseRepository implements RepositoryInterface
             return $this->model->field($columns)->select();
         } catch (DbException $e) {
             $this->app->log->error($e->getMessage());
-            throw new DbException('未知错误');
+            throw new BizException();
         }
     }
 
