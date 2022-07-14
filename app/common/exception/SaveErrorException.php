@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace app\common\exception;
 
-use think\Exception;
-
 /**
  * 数据 - 异常类.
  */
-class SaveErrorException extends Exception
+class SaveErrorException extends BaseException
 {
     protected $code = 10500;
 

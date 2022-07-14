@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace app\common\exception;
 
-use think\Exception;
-
 /**
  * 授权 - 异常类.
  */
-class UnauthorizedException extends Exception
+class UnauthorizedException extends BaseException
 {
     protected $code = 10401;
 

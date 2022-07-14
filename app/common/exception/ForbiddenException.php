@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace app\common\exception;
 
-use think\Exception;
-
 /**
  * 权限 - 异常类.
  */
-class ForbiddenException extends Exception
+class ForbiddenException extends BaseException
 {
     protected $code = 10403;
 

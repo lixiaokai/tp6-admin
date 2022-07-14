@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\common\exception;
+namespace app\common\exception\handler;
 
 use think\App;
 use think\exception\Handle;
