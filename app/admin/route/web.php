@@ -21,6 +21,7 @@ Route::group(static function () {
     // Auth
     Route::get('auth/user','auth.User/index');
     Route::get('auth/user/:id','auth.User/read');
+    Route::post('auth/user','auth.User/save');
 });
 
 // 该应用 miss 路由

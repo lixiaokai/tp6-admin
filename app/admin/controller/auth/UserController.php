@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 namespace app\admin\controller\auth;
 
+use app\admin\validate\UserValidate;
 use app\common\controller\BaseController;
 use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;
@@ -25,7 +26,7 @@ class UserController extends BaseController
     {
         $res = $this->service->search($this->request->param());
 
-        return json(['code' => 200, 'data' => $res]);
+        return json(['code' => 200, 'message' => '', 'data' => $res]);
     }
 
     /**
@@ -43,12 +44,13 @@ class UserController extends BaseController
     /**
      * 用户管理 - 创建.
      *
+     * @throws SaveErrorException
      */
     public function save(UserValidate $validate): Response
     {
         $model = $this->service->create($validate->checked());
 
-        return json(['code' => 200, 'data' => $model]);
+        return json(['code' => 10200, 'message' => '', 'data' => $model]);
     }
 
     /**
@@ -61,7 +63,7 @@ class UserController extends BaseController
         $data = $validate->scene('update')->checked();
         $this->service->update($model, $data);
 
-        return json(['code' => 200, 'data' => $model]);
+        return json(['code' => 10200, 'message' => '', 'data' => $model]);
     }
 
     /**
@@ -87,7 +89,7 @@ class UserController extends BaseController
         $model = $this->service->get($id);
         $model = $this->service->enable($model);
 
-        return json(['code' => 200, 'data' => $model]);
+        return json(['code' => 10200, 'message' => '', 'data' => $model]);
     }
 
     /**
@@ -100,7 +102,7 @@ class UserController extends BaseController
         $model = $this->service->get($id);
         $model = $this->service->disable($model);
 
-        return json(['code' => 200, 'data' => $model]);
+        return json(['code' => 10200, 'message' => '', 'data' => $model]);
     }
 
     /**
