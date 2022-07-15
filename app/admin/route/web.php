@@ -8,6 +8,14 @@ use think\facade\Route;
  * 1. 对路由进行分组可以有效提高路由的匹配性能.
  */
 
+/**
+ * 全局变量规则.
+ */
+Route::pattern([
+    'name' => '\w+',
+    'id'   => '\d+',
+]);
+
 // 不需要登录的路由
 Route::group(static function () {
 
@@ -20,7 +28,7 @@ Route::group(static function () {
 
     // Auth
     Route::get('auth/user','auth.User/index');
-    Route::get('auth/user/:id','auth.User/read');
+    Route::get('auth/user/<id>','auth.User/read');
     Route::post('auth/user','auth.User/save');
 });
 
