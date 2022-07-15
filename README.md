@@ -73,3 +73,17 @@ php think make:controller admin@User
 // 生成多级控制器: app/admin/controller/auth/UserController.php
 php think make:controller admin@auth/User
 ```
+
+### 4. 快速生成模型
+
+生成 `admin` 应用的 `Blog` ( 注意首字母大写 ) 模型类库文件
+```
+php think make:model admin@Blog
+```
+
+### 5. 快速生成验证器
+
+生成 `admin` 应用的 `UserValidate` ( 注意首字母大写 ) 验证器类文件
+```
+php think make:validate admin@UserValidate
+```
