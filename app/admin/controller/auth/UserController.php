@@ -48,9 +48,9 @@ class UserController extends BaseController
      */
     public function save(UserValidate $validate): Response
     {
-        $model = $this->service->create($validate->checked());
+        $model = $this->service->create($validate->validated());
 
-        return json(['code' => 10200, 'message' => '', 'data' => $model]);
+        return json(['code' => 10200, 'message' => '创建成功', 'data' => $model]);
     }
 
     /**
@@ -60,23 +60,21 @@ class UserController extends BaseController
     public function update(UserValidate $validate, int $id): Response
     {
         $model = $this->service->get($id);
-        $data = $validate->scene('update')->checked();
+        $data = $validate->validated('update');
         $this->service->update($model, $data);
 
-        return json(['code' => 10200, 'message' => '', 'data' => $model]);
+        return json(['code' => 10200, 'message' => '更新成功', 'data' => $model]);
     }
 
     /**
      * 用户管理 - 删除.
-     *
-     * @throws NotFoundException
      */
     public function delete(int $id): Response
     {
-        $user = $this->service->get($id);
+        // $user = $this->service->get($id);
         // $this->service->delete($user);
 
-        return json(['code' => 10200, 'message' => '', 'data' => ['id' => $id]]);
+        return json(['code' => 10200, 'message' => '删除成功', 'data' => ['id' => $id]]);
     }
 
     /**
@@ -89,7 +87,7 @@ class UserController extends BaseController
         $model = $this->service->get($id);
         $model = $this->service->enable($model);
 
-        return json(['code' => 10200, 'message' => '', 'data' => $model]);
+        return json(['code' => 10200, 'message' => '启用成功', 'data' => $model]);
     }
 
     /**
@@ -102,7 +100,7 @@ class UserController extends BaseController
         $model = $this->service->get($id);
         $model = $this->service->disable($model);
 
-        return json(['code' => 10200, 'message' => '', 'data' => $model]);
+        return json(['code' => 10200, 'message' => '禁用成功', 'data' => $model]);
     }
 
     /**
