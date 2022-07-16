@@ -30,6 +30,7 @@ Route::group(static function () {
     Route::get('auth/user','auth.User/index');
     Route::get('auth/user/:id','auth.User/read');
     Route::post('auth/user','auth.User/save');
+    Route::put('auth/user/:id','auth.User/update');
 });
 
 // 该应用 miss 路由

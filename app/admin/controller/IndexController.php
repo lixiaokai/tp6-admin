@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace app\admin\controller;
 
-use app\common\controller\BaseController;
+use app\common\controller\JsonController;
 
-class IndexController extends BaseController
+/**
+ * Home - 控制器.
+ */
+class IndexController extends JsonController
 {
     public function index(): string
     {
