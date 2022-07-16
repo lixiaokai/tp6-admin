@@ -5,6 +5,7 @@ namespace app\common\exception\handler;
 
 use think\App;
 use think\exception\Handle;
+use think\exception\ValidateException;
 use think\Response;
 use Throwable;
 
@@ -28,6 +29,15 @@ class ExceptionHandle extends Handle
     public function render($request, Throwable $e): Response
     {
         // 添加自定义异常处理机制
+        if ($e instanceof ValidateException) {
+            $res = [
+                'code' => $e->getCode(),
+                'message' => $e->getError(),
+                'data' => null,
+            ];
+
+            return Response::create($res, 'json');
+        }
 
         // 其他错误交给系统处理
         return parent::render($request, $e);
