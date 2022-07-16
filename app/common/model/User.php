@@ -10,12 +10,15 @@ class User extends BaseModel
 {
     protected $table = 'user';
 
-    protected $createTime = 'created_at';
-    protected $updateTime = 'updated_at';
-
     protected $hidden = ['password', 'salt'];
 
-    protected $type = [
+    protected $schema = [
+        'id' => 'int',
+        'nickname' => 'string',
+        'phone' => 'string',
+        'password' => 'string',
+        'salt' => 'string',
+        'status' => 'string',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
