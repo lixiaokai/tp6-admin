@@ -6,6 +6,7 @@ namespace app\common\controller;
 use think\App;
 use think\exception\ValidateException;
 use think\Request;
+use think\Response;
 use think\Validate;
 
 /**
@@ -86,5 +87,4 @@ abstract class BaseController
 
         return $v->failException()->check($data);
     }
-
 }
