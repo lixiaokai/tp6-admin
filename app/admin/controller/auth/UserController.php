@@ -1,16 +1,18 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace app\admin\controller\auth;
 
+use app\admin\collection\auth\UserCollection;
+use app\admin\resource\auth\UserResource;
 use app\admin\validate\UserValidate;
 use app\common\controller\BaseController;
 use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;
 use app\common\service\user\UserService;
+use think\annotation\Inject;
 use think\db\exception\DbException;
 use think\Response;
-use think\annotation\Inject;
 
 class UserController extends BaseController
 {
@@ -26,7 +28,7 @@ class UserController extends BaseController
     {
         $res = $this->service->search($this->request->param());
 
-        return json(['code' => 200, 'message' => '', 'data' => $res]);
+        return UserCollection::make($res);
     }
 
     /**
@@ -38,7 +40,7 @@ class UserController extends BaseController
     {
         $model = $this->service->get($id);
 
-        return json(['code' => 10200, 'message' => '', 'data' => $model]);
+        return UserResource::make($model);
     }
 
     /**
