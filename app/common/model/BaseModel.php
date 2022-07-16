@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace app\common\model;
 
@@ -24,4 +24,7 @@ class BaseModel extends Model
      * @var bool
      */
     protected $convertNameToCamel = true;
+
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
 }
