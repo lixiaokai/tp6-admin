@@ -31,6 +31,6 @@ abstract class BaseCollection
             'data' => $collection->map(fn($resource) => (new static($resource))->toArray()),
         ];
 
-        return Response::create($res, 'json')->contentType('application/json');
+        return Response::create($res, 'json');
     }
 }

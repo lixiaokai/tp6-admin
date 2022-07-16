@@ -50,7 +50,7 @@ abstract class BaseResource
 
     public function toResponse(): Response
     {
-        return Response::create($this->getData(), 'json')->contentType('application/json');
+        return Response::create($this->getData(), 'json');
     }
 
     public function __isset($key)

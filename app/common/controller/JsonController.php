@@ -22,6 +22,6 @@ abstract class JsonController extends BaseController
             'data' => $data,
         ];
 
-        return Response::create($res, 'json')->contentType('application/json');
+        return Response::create($res, 'json');
     }
 }
