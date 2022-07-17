@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace app\common\repository;
 
+use app\common\constant\Status;
 use app\common\model\User;
 
 /**
@@ -22,7 +23,7 @@ class UserRepository extends BaseRepository
      */
     public function enable(User $model): User
     {
-        $model->status = 1; // Todo: 待用常量替换
+        $model->status = Status::ENABLE;
         $model->save();
 
         return $model;
@@ -33,7 +34,7 @@ class UserRepository extends BaseRepository
      */
     public function disable(User $model): User
     {
-        $model->status = 0; // Todo: 待用常量替换
+        $model->status = Status::DISABLE;
         $model->save();
 
         return $model;

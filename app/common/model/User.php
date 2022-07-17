@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace app\common\model;
 
-use app\common\constant\StandardStatus;
+use app\common\constant\Status;
 
 /**
  * 用户 - 模型.
@@ -38,6 +38,6 @@ class User extends BaseModel
 
     public function getStatusTextAttr(): string
     {
-        return StandardStatus::getText($this->getAttr('status'));
+        return Status::getText($this->getAttr('status'));
     }
 }

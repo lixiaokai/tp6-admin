@@ -6,12 +6,12 @@ namespace app\common\constant;
 use app\common\constant\library\BaseConstant;
 
 /**
- * 标准状态 - 常量类.
+ * 标准状态 - 枚举常量类.
  *
  * @method static getColor(string $key)
  * @method static getText(string $key)
  */
-class StandardStatus extends BaseConstant
+class Status extends BaseConstant
 {
     /**
      * 通用状态 - 启用.
