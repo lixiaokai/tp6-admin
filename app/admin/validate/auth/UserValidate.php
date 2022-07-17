@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\admin\validate;
+namespace app\admin\validate\auth;
 
 use app\common\model\User;
 use app\common\validate\BaseValidate;
@@ -22,7 +22,7 @@ class UserValidate extends BaseValidate
     {
         // 昵称唯一验证规则 ( 排除自己 )
         $id = $this->request->param('id');
-        $nicknameUniqueRule = User::class . ',nickname,' . $id;
+        $nicknameUniqueRule = $id ? User::class . ',nickname,' . $id : User::class;
 
         return [
             'nickname' => ['require', 'chsDash', 'min:2', 'max:15', 'unique' => $nicknameUniqueRule],
