@@ -1,6 +1,7 @@
 <?php
 declare (strict_types = 1);
 
+use app\admin\middleware\Auth;
 use think\facade\Route;
 
 /**
@@ -35,7 +36,7 @@ Route::group(static function () {
     Route::put('auth/user/:id','auth.User/update');             // 修改
     Route::put('auth/user/:id/enable','auth.User/enable');      // 启用
     Route::put('auth/user/:id/disable','auth.User/disable');    // 禁用
-});
+})->middleware(Auth::class);
 
 // 该应用 miss 路由
 Route::miss(static fn() => '404 Not Found!');

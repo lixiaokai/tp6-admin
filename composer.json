@@ -24,11 +24,13 @@
         "topthink/framework": "^6.0.0",
         "topthink/think-orm": "^2.0",
         "topthink/think-multi-app": "^1.0",
-        "topthink/think-annotation": "^2.0"
+        "topthink/think-annotation": "^2.0",
+        "firebase/php-jwt": "^6.3"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",
-        "topthink/think-trace":"^1.0"
+        "topthink/think-trace":"^1.0",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
@@ -38,6 +40,11 @@
             "": "extend/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "test\\": "test"
+        }
+    },
     "config": {
         "preferred-install": "dist"
     },
@@ -45,6 +52,8 @@
         "post-autoload-dump": [
             "@php think service:discover",
             "@php think vendor:publish"
-        ]
+        ],
+        "test": "php vendor/bin/phpunit",
+        "dev": "php think run"
     }
 }
