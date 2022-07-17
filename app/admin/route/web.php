@@ -27,10 +27,14 @@ Route::group(static function () {
     Route::get('index','Index/index');
 
     // Auth
-    Route::get('auth/user','auth.User/index');
-    Route::get('auth/user/:id','auth.User/read');
-    Route::post('auth/user','auth.User/save');
-    Route::put('auth/user/:id','auth.User/update');
+
+    // Auth - 用户管理
+    Route::get('auth/user','auth.User/index');                  // 列表
+    Route::get('auth/user/:id','auth.User/read');               // 详情
+    Route::post('auth/user','auth.User/save');                  // 创建
+    Route::put('auth/user/:id','auth.User/update');             // 修改
+    Route::put('auth/user/:id/enable','auth.User/enable');      // 启用
+    Route::put('auth/user/:id/disable','auth.User/disable');    // 禁用
 });
 
 // 该应用 miss 路由
