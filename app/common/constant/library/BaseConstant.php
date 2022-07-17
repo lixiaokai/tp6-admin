@@ -14,8 +14,6 @@ use think\helper\Str;
  */
 abstract class BaseConstant
 {
-    protected static array $container = [];
-
     /**
      * @param string $name 函数名
      * @param mixed $arguments 函数参数

@@ -28,7 +28,7 @@ class AnnotationReader
         return $result;
     }
 
-    protected static function parse(string $doc, array $previous = [])
+    protected static function parse(string $doc, array $previous = []): array
     {
         $pattern = '/\\@(\\w+)\\(\\"(.+)\\"\\)/U';
         if (preg_match_all($pattern, $doc, $result)) {
