@@ -5,7 +5,7 @@ namespace app\admin\controller\auth;
 
 use app\admin\collection\auth\UserCollection;
 use app\admin\resource\auth\UserResource;
-use app\admin\validate\UserValidate;
+use app\admin\validate\auth\UserValidate;
 use app\common\controller\JsonController;
 use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;
