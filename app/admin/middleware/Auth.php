@@ -7,7 +7,7 @@ use app\common\exception\NotFoundException;
 use app\common\exception\UnauthorizedException;
 use app\common\model\User;
 use app\common\service\auth\JWTService;
-use app\common\service\user\UserService;
+use app\common\service\auth\UserService;
 use Closure;
 use think\annotation\Inject;
 use think\App;

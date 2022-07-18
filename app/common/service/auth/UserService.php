@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\common\service\user;
+namespace app\common\service\auth;
 
 use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;

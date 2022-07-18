@@ -9,7 +9,7 @@ use app\admin\validate\auth\UserValidate;
 use app\common\controller\JsonController;
 use app\common\exception\NotFoundException;
 use app\common\exception\SaveErrorException;
-use app\common\service\user\UserService;
+use app\common\service\auth\UserService;
 use think\annotation\Inject;
 use think\db\exception\DbException;
 use think\Response;
