@@ -55,7 +55,7 @@ class ApiExceptionHandle extends Handle
     }
 
     #[ArrayShape(['code' => "int", 'message' => "string", 'data' => "null"])]
-    public function getData(): array
+    protected function getData(): array
     {
         return [
             'code' => $this->code,
