@@ -30,6 +30,7 @@
     "require-dev": {
         "symfony/var-dumper": "^4.2",
         "topthink/think-trace":"^1.0",
+        "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
@@ -53,6 +54,7 @@
             "@php think service:discover",
             "@php think vendor:publish"
         ],
+        "kill": "kill -QUIT $(lsof -i :8000 | grep LISTEN | awk '{print $2}')",
         "test": "php vendor/bin/phpunit",
         "dev": "php think run"
     }
