@@ -6,12 +6,16 @@ use app\common\exception\BizException;
 use app\common\exception\UnauthorizedException;
 use app\common\ideHelper\IDEJWTPayloadStdClass;
 use Exception;
+use Firebase\JWT\BeforeValidException;
+use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Firebase\JWT\SignatureInvalidException;
 use stdClass;
 use think\facade\Config;
 use think\facade\Log;
 use think\Request;
+use UnexpectedValueException;
 
 /*
  * Json Web Token.
@@ -57,10 +61,23 @@ class JWTService
         try {
             JWT::$leeway = 60; // 当前时间减去 60，留点余地
             return JWT::decode($jwt, new Key(self::key(), 'HS256'));
+        } catch (SignatureInvalidException $e) { // 签名验证失败
+            $message = 'token 验证失败';
+        } catch (BeforeValidException $e) {
+            $message = "token 未生效";
+        } catch (ExpiredException $e) {
+            $message = 'token 已过期';
+        } catch (UnexpectedValueException $e) {
+            $message = 'token 无效';
+        } catch (BizException $e) {
+            $message = $e->getMessage();
         } catch (Exception $e) {
-            Log::error($e->getMessage());
-            throw new UnauthorizedException();
+            $message = 'token 未知错误';
         }
+
+        Log::error($message);
+        Log::error($e->getMessage());
+        throw new UnauthorizedException($message);
     }
 
     /**
