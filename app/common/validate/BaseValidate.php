@@ -60,8 +60,8 @@ abstract class BaseValidate extends Validate
     protected function beforeValidated(): void
     {
         $this->rule = array_merge($this->rule, $this->rules());
-        $this->field = array_merge($this->rule, $this->fields());
-        $this->scene = array_merge($this->rule, $this->scenes());
+        $this->field = array_merge($this->field, $this->fields());
+        $this->scene = array_merge($this->scene, $this->scenes());
     }
 
     /**
