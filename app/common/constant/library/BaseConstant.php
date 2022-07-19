@@ -15,6 +15,14 @@ use think\helper\Str;
 abstract class BaseConstant
 {
     /**
+     * 获取 - 所有的 code.
+     */
+    public static function codes(): array
+    {
+        return ConstantCollector::getAll(static::class);
+    }
+
+    /**
      * @param string $name 函数名
      * @param mixed $arguments 函数参数
      * @throws ConstantException|ReflectionException

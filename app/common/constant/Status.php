@@ -8,8 +8,8 @@ use app\common\constant\library\BaseConstant;
 /**
  * 标准状态 - 枚举常量类.
  *
- * @method static getColor(string $key)
- * @method static getText(string $key)
+ * @method static getColor(string $code)
+ * @method static getText(string $code)
  */
 class Status extends BaseConstant
 {
