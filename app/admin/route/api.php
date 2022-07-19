@@ -19,7 +19,8 @@ Route::pattern([
 
 // 不需要登录的路由
 Route::group(static function () {
-
+    Route::post('auth/login','Auth/login');                     // 登录
+    Route::post('auth/refresh','Auth/refresh');                 // 刷新 token
 });
 
 // 需要登录的路由
@@ -28,6 +29,7 @@ Route::group(static function () {
     Route::get('index','Index/index');
 
     // Auth
+    Route::post('auth/logout','Auth/logout');                   // 登出
 
     // Auth - 用户管理
     Route::get('auth/user','auth.User/index');                  // 列表
