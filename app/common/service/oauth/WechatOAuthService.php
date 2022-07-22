@@ -12,7 +12,7 @@ use think\App;
 use think\facade\Config;
 
 /**
- * 服务 - 基类.
+ * 微信社会化登录 - 服务.
  */
 class WechatOAuthService extends BaseService
 {
