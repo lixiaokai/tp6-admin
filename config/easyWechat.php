@@ -11,10 +11,10 @@ return [
     'miniApp' => [
         // 默认的小程序配置，也可以把 default 改成对应小程序标识
         'default' => [
-            'app_id' => env('wechat.mini_app_appid'),
-            'secret' => env('wechat.mini_app_secret'),
-            'token' => env('wechat.mini_app_token'),
-            'aes_key' => env('wechat.mini_app_aes_key'),
+            'app_id' => env('wechat.mini_program_appid', ''),
+            'secret' => env('wechat.mini_program_secret', ''),
+            'token' => '',
+            'aes_key' => '',
 
             'http' => [
                 'throw'  => true, // 状态码非 200、300 时是否抛出异常，默认为开启
@@ -42,9 +42,9 @@ return [
             /**
              * 账号基本信息，请从微信公众平台/开放平台获取
              */
-            'app_id' => 'wxf943b6fd2b21a517',
-            'secret' => '48d71999dc1e2b18a61ee5ff1a916b9d',
-            'token'   => 'your-token', // Token
+            'app_id' => env('wechat.official_account_appid', ''),
+            'secret' => env('wechat.official_account_secret', ''),
+            'token'   => '', // Token
             'aes_key' => '', // EncodingAESKey，兼容与安全模式下请一定要填写！！！
 
             /**
@@ -56,7 +56,7 @@ return [
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],
                 // 'callback' => '/index/oauth/callback', easyWechat 文档说的 callback 参数是错的，需要改成 redirect_url
-                'redirect_url' => '/index/oauth/callback',
+                'redirect_url' => 'http://127.0.0.1:8000/index/oauth/wechat/callback',
             ],
 
             /**
