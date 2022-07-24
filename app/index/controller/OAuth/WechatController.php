@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace app\index\controller\OAuth;
+namespace app\index\controller\oauth;
 
 use app\common\controller\BaseController;
 use app\common\service\oauth\WechatOAuthService;
+use app\index\validate\oauth\CodeValidate;
 use think\annotation\Inject;
 use think\Response;
 
@@ -21,17 +22,17 @@ class WechatController extends BaseController
      */
     public function login(): Response
     {
-        return redirect($this->service->getAuthorizationUrl());
+        return redirect($this->service->getAuthorizationUrl(), 200);
     }
 
     /**
      * 微信登录 - 回调.
      */
-    public function callback(): Response
+    public function callback(CodeValidate $validate): Response
     {
-        $code = $this->request->param('code');
-        $oauthUser = $this->service->getUser($code);
+        $data = $validate->validated();
+        $oauthUser = $this->service->getUser($data['code']);
 
-        return redirect($this->service->callback($oauthUser));
+        return redirect($this->service->callback($oauthUser), 200);
     }
 }

@@ -22,7 +22,8 @@ Route::group(static function () {
     Route::get('auth/login','Auth/login');                      // 登录
 
     // 社会化登录
-    Route::get('oauth/wechat/login','OAuth.Wechat/login');      // 微信登录
+    Route::get('oauth/wechat/login','oauth.Wechat/login');       // 微信登录跳转
+    Route::get('oauth/wechat/callback','oauth.Wechat/callback'); // 微信登录回调
 });
 
 // 需要登录的路由

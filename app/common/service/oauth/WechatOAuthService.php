@@ -27,6 +27,7 @@ class WechatOAuthService extends BaseService
     public function __construct()
     {
         $config = Config::get('easyWechat.officialAccount.default');
+
         $this->OAuth = (new Application($config))->getOAuth();
     }
 
@@ -56,6 +57,12 @@ class WechatOAuthService extends BaseService
     public function callback(UserInterface $user): string
     {
         // Todo: 登录逻辑
+
+        // 1. 根据 openid 获取用户
+
+        // 1.1 如果用户不存在则跳转到注册页面
+
+        // 1.2 如果用户存在
 
         return  'redirectOriginalUrl';
     }
