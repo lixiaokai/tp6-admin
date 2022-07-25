@@ -25,14 +25,17 @@
         "topthink/think-orm": "^2.0",
         "topthink/think-multi-app": "^1.0",
         "topthink/think-annotation": "^2.0",
+        "topthink/think-queue": "^3.0",
         "firebase/php-jwt": "^6.3",
         "w7corp/easywechat": "^6.7"
+
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",
         "topthink/think-trace":"^1.0",
         "roave/security-advisories": "dev-latest",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.5"
     },
     "autoload": {
         "psr-4": {
@@ -44,7 +47,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "test\\": "test"
+            "tests\\": "tests"
         }
     },
     "config": {
