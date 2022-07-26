@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace tests;
 
-use PHPUnit\Framework\TestCase;
-
 /**
- * 单元测试 - 基类.
+ * 单元测试 - 抽象类.
  */
-class BaseTestCase extends TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * 测试之前 - 执行.

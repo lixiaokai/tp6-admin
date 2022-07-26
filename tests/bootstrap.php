@@ -1,5 +1,9 @@
 <?php
 
+namespace think;
+
 include __DIR__ . '/../vendor/autoload.php';
 
-(new \think\App())->http->run();
+$http = (new \think\App())->http;
+$response = $http->run();
+$http->end($response);
